@@ -26,6 +26,7 @@
   /* RGB versions for opacity control */
   --color-brown-600-rgb: 94, 82, 64;
   --color-teal-500-rgb: 33, 128, 141;
+  --color-primary-rgb: 33, 128, 141;
   --color-slate-900-rgb: 19, 52, 59;
   --color-slate-500-rgb: 98, 108, 113;
   --color-red-500-rgb: 192, 21, 47;
@@ -150,6 +151,7 @@
     /* RGB versions for opacity control (Dark Mode) */
     --color-gray-400-rgb: 119, 124, 124;
     --color-teal-300-rgb: 50, 184, 198;
+    --color-primary-rgb: 50, 184, 198;
     --color-gray-300-rgb: 167, 169, 169;
     --color-gray-200-rgb: 245, 245, 245;
 
@@ -210,6 +212,7 @@
   /* RGB versions for opacity control (dark mode) */
   --color-gray-400-rgb: 119, 124, 124;
   --color-teal-300-rgb: 50, 184, 198;
+  --color-primary-rgb: 50, 184, 198;
   --color-gray-300-rgb: 167, 169, 169;
   --color-gray-200-rgb: 245, 245, 245;
 
@@ -267,6 +270,7 @@
   /* RGB versions for opacity control (light mode) */
   --color-brown-600-rgb: 94, 82, 64;
   --color-teal-500-rgb: 33, 128, 141;
+  --color-primary-rgb: 33, 128, 141;
   --color-slate-900-rgb: 19, 52, 59;
 
   /* Semantic Color Tokens (Light Mode) */
@@ -1093,31 +1097,81 @@ body {
 
 /* Enhanced About Section */
 .about {
-  padding: var(--space-32) 0;
-  background: var(--color-surface);
+  padding: 72px 0;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(var(--color-primary-rgb), 0.14), transparent 34%),
+    radial-gradient(circle at 88% 22%, rgba(var(--color-warning-rgb), 0.16), transparent 30%),
+    linear-gradient(180deg, var(--color-surface), var(--color-background));
 }
 
 .teacher-profile-enhanced {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: minmax(250px, 330px) 1fr;
   gap: var(--space-32);
-  background: linear-gradient(135deg, var(--color-bg-2), var(--color-bg-6));
-  padding: var(--space-32);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-lg);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.62)),
+    linear-gradient(135deg, var(--color-bg-2), var(--color-bg-6));
+  padding: clamp(24px, 4vw, 44px);
+  border-radius: 28px;
+  border: 1px solid rgba(var(--color-primary-rgb), 0.18);
+  box-shadow: 0 24px 70px rgba(19, 52, 59, 0.14);
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .teacher-profile-enhanced::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-success), var(--color-warning));
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--color-primary), var(--color-success), var(--color-warning)) top/100% 6px no-repeat,
+    radial-gradient(circle at 0% 0%, rgba(var(--color-primary-rgb), 0.22), transparent 28%),
+    radial-gradient(circle at 100% 100%, rgba(var(--color-warning-rgb), 0.18), transparent 26%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.teacher-profile-enhanced::after {
+  content: 'ANA';
+  position: absolute;
+  right: -18px;
+  bottom: -34px;
+  font-size: clamp(86px, 12vw, 150px);
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  color: rgba(var(--color-primary-rgb), 0.055);
+  z-index: -1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .teacher-profile-enhanced {
+    background:
+      linear-gradient(135deg, rgba(31, 33, 33, 0.92), rgba(38, 40, 40, 0.74)),
+      linear-gradient(135deg, var(--color-bg-2), var(--color-bg-6));
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+  }
+
+  .profile-highlight-card,
+  .qualifications-section,
+  .achievements-section,
+  .teaching-methods {
+    background: rgba(38, 40, 40, 0.72);
+  }
+}
+
+[data-color-scheme="dark"] .teacher-profile-enhanced {
+  background:
+    linear-gradient(135deg, rgba(31, 33, 33, 0.92), rgba(38, 40, 40, 0.74)),
+    linear-gradient(135deg, var(--color-bg-2), var(--color-bg-6));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+[data-color-scheme="dark"] .profile-highlight-card,
+[data-color-scheme="dark"] .qualifications-section,
+[data-color-scheme="dark"] .achievements-section,
+[data-color-scheme="dark"] .teaching-methods {
+  background: rgba(38, 40, 40, 0.72);
 }
 
 .teacher-avatar-section {
@@ -1195,6 +1249,14 @@ body {
   border-color: var(--color-warning);
 }
 
+
+.badge--premium {
+  background: linear-gradient(135deg, #f8d775, #c89116);
+  color: #3b2500;
+  border-color: rgba(200, 145, 22, 0.65);
+  box-shadow: 0 8px 18px rgba(200, 145, 22, 0.2);
+}
+
 .teacher-info-detailed {
   display: flex;
   flex-direction: column;
@@ -1204,6 +1266,60 @@ body {
 .teacher-header {
   border-bottom: 2px solid var(--color-border);
   padding-bottom: var(--space-16);
+}
+
+
+.profile-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  width: fit-content;
+  padding: var(--space-6) var(--space-12);
+  margin-bottom: var(--space-10);
+  border-radius: var(--radius-full);
+  background: rgba(var(--color-primary-rgb), 0.12);
+  color: var(--color-primary);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.24);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.teacher-bio {
+  max-width: 760px;
+  margin-bottom: var(--space-16);
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  line-height: 1.7;
+}
+
+.profile-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: var(--space-12);
+  margin-top: var(--space-16);
+}
+
+.profile-highlight-card {
+  padding: var(--space-16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.14);
+  box-shadow: var(--shadow-md);
+}
+
+.profile-highlight-card strong {
+  display: block;
+  color: var(--color-primary);
+  font-size: var(--font-size-3xl);
+  line-height: 1;
+}
+
+.profile-highlight-card span {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 .teacher-name {
@@ -1235,10 +1351,60 @@ body {
   font-size: var(--font-size-sm);
 }
 
+
+.mentor-quote {
+  position: relative;
+  padding: var(--space-20) var(--space-24) var(--space-20) 56px;
+  background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.12), rgba(var(--color-warning-rgb), 0.12));
+  border: 1px solid rgba(var(--color-primary-rgb), 0.18);
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.quote-mark {
+  position: absolute;
+  left: 18px;
+  top: 4px;
+  color: var(--color-primary);
+  font-size: 58px;
+  line-height: 1;
+  opacity: 0.45;
+}
+
+.mentor-quote p {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.7;
+}
+
+.profile-cta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding: var(--space-16);
+  border-radius: 18px;
+  background: var(--color-slate-900);
+  color: var(--color-white);
+  box-shadow: var(--shadow-lg);
+}
+
+.profile-cta-strip strong,
+.profile-cta-strip span {
+  display: block;
+}
+
+.profile-cta-strip span {
+  margin-top: var(--space-4);
+  opacity: 0.82;
+  font-size: var(--font-size-sm);
+}
+
 .qualifications-section,
 .achievements-section,
 .teaching-methods {
-  background: rgba(var(--color-surface), 0.5);
+  background: rgba(255, 255, 255, 0.68);
   padding: var(--space-16);
   border-radius: var(--radius-base);
   border: 1px solid var(--color-border);
@@ -2262,6 +2428,11 @@ body {
     grid-template-columns: 1fr;
     text-align: center;
   }
+
+  .profile-eyebrow {
+    margin-left: auto;
+    margin-right: auto;
+  }
   
   .location-content,
   .contact-content {
@@ -2275,6 +2446,15 @@ body {
 }
 
 @media (max-width: 768px) {
+  .profile-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-cta-strip {
+    flex-direction: column;
+    text-align: center;
+  }
+
   .header-content {
     flex-direction: column;
     gap: var(--space-12);
